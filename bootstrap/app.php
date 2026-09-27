@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminIpGuard;
 use App\Http\Middleware\EnsureUserRole;
+use App\Http\Middleware\HoneypotProtection;
 use App\Http\Middleware\LogSecurityEvents;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
@@ -16,7 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'role' => EnsureUserRole::class,
+            'role'     => EnsureUserRole::class,
+            'admin.ip' => AdminIpGuard::class,
+            'honeypot' => HoneypotProtection::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'api/*',

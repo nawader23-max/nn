@@ -49,7 +49,7 @@ Route::post('/pricing/calculate', [PricingController::class, 'calculate'])->name
 // About & Contact
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:contact')->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])->middleware(['throttle:contact', 'honeypot'])->name('contact.send');
 
 // Help Center
 Route::get('/help', [HelpController::class, 'index'])->name('help');
@@ -66,7 +66,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.post');
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:register')->name('register.post');
+    Route::post('/register', [AuthController::class, 'register'])->middleware(['throttle:register', 'honeypot'])->name('register.post');
     Route::get('/register/verify', [AuthController::class, 'verifyForm'])->name('register.verify');
     Route::get('/forgot-password', [AuthController::class, 'forgotForm'])->name('password.request');
     Route::post('/forgot-password', [AuthController::class, 'forgot'])->middleware('throttle:password-reset')->name('password.email');
@@ -120,7 +120,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     // Integrations Command Center & API Keys
     Route::get('/integrations', [IntegrationsController::class, 'index'])->name('integrations');
-    Route::post('/integrations/key', [IntegrationsController::class, 'saveKey'])->middleware('role:super_admin')->name('integrations.key');
+    Route::post('/integrations/key', [IntegrationsController::class, 'saveKey'])->middleware(['role:super_admin', 'admin.ip'])->name('integrations.key');
     Route::get('/integrations/test', [IntegrationsController::class, 'testConnection'])->name('integrations.test');
 
     // Affiliate Marketing Portal
@@ -139,16 +139,16 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::post('/ai-studio/generate', [AIStudioController::class, 'generate'])->name('ai-studio.generate');
 
     // Live Visual Page & Content Editor (staff-only content operations)
-    Route::get('/editor', [EditorController::class, 'index'])->middleware('role:super_admin,sovereign_advisor')->name('editor');
-    Route::post('/editor/save', [EditorController::class, 'save'])->middleware('role:super_admin,sovereign_advisor')->name('editor.save');
-    Route::post('/editor/reset', [EditorController::class, 'reset'])->middleware('role:super_admin,sovereign_advisor')->name('editor.reset');
-    Route::get('/editor/export', [EditorController::class, 'export'])->middleware('role:super_admin,sovereign_advisor')->name('editor.export');
-    Route::post('/editor/import', [EditorController::class, 'import'])->middleware('role:super_admin,sovereign_advisor')->name('editor.import');
+    Route::get('/editor', [EditorController::class, 'index'])->middleware(['role:super_admin,sovereign_advisor', 'admin.ip'])->name('editor');
+    Route::post('/editor/save', [EditorController::class, 'save'])->middleware(['role:super_admin,sovereign_advisor', 'admin.ip'])->name('editor.save');
+    Route::post('/editor/reset', [EditorController::class, 'reset'])->middleware(['role:super_admin,sovereign_advisor', 'admin.ip'])->name('editor.reset');
+    Route::get('/editor/export', [EditorController::class, 'export'])->middleware(['role:super_admin,sovereign_advisor', 'admin.ip'])->name('editor.export');
+    Route::post('/editor/import', [EditorController::class, 'import'])->middleware(['role:super_admin,sovereign_advisor', 'admin.ip'])->name('editor.import');
 
     // High-Capacity Universal Document Ingestion & Archive Extractor Engine (sovereign admin tooling)
-    Route::get('/importer', [DocumentIngestionController::class, 'index'])->middleware('role:super_admin')->name('importer');
-    Route::post('/importer/upload', [DocumentIngestionController::class, 'upload'])->middleware('role:super_admin')->name('importer.upload');
-    Route::get('/importer/export', [DocumentIngestionController::class, 'export'])->middleware('role:super_admin')->name('importer.export');
+    Route::get('/importer', [DocumentIngestionController::class, 'index'])->middleware(['role:super_admin', 'admin.ip'])->name('importer');
+    Route::post('/importer/upload', [DocumentIngestionController::class, 'upload'])->middleware(['role:super_admin', 'admin.ip'])->name('importer.upload');
+    Route::get('/importer/export', [DocumentIngestionController::class, 'export'])->middleware(['role:super_admin', 'admin.ip'])->name('importer.export');
 
     // Requests
     Route::get('/requests', [RequestController::class, 'index'])->name('requests');
