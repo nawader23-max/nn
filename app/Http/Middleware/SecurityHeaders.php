@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Baseline browser-hardening headers for every web response.
+ * Comprehensive browser-hardening headers for every web response.
  *
- * HSTS is emitted only for secure requests so the local/CLI contexts stay
- * untouched; the edge (nginx / Cloudflare) already sends it in production.
+ * Covers OWASP Top-10 browser-side mitigations: HSTS with preload, CSP,
+ * framing prevention, MIME sniffing, referrer leakage, and feature-policy
+ * lockdown. HSTS is emitted only for secure requests so local/CLI contexts
+ * stay untouched; the edge (nginx / Cloudflare) already sends it in production.
  */
 class SecurityHeaders
 {
@@ -19,18 +21,23 @@ class SecurityHeaders
         $response = $next($request);
 
         $headers = [
-            'X-Content-Type-Options' => 'nosniff',
-            'X-Frame-Options' => 'SAMEORIGIN',
-            'Referrer-Policy' => 'strict-origin-when-cross-origin',
-            'Permissions-Policy' => 'camera=(), microphone=(), geolocation=(), payment=()',
-            'Cross-Origin-Opener-Policy' => 'same-origin',
+            'X-Content-Type-Options'          => 'nosniff',
+            'X-Frame-Options'                 => 'SAMEORIGIN',
+            'Referrer-Policy'                 => 'strict-origin-when-cross-origin',
+            'Permissions-Policy'              => 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()',
+            'Cross-Origin-Opener-Policy'      => 'same-origin',
+            'Cross-Origin-Embedder-Policy'    => 'credentialless',
+            'Cross-Origin-Resource-Policy'    => 'same-origin',
             'X-Permitted-Cross-Domain-Policies' => 'none',
+            'X-XSS-Protection'               => '1; mode=block',
+            'X-DNS-Prefetch-Control'          => 'off',
+            'X-Download-Options'              => 'noopen',
         ];
 
         if ($request->isSecure()) {
-            // Kept identical to the edge (nginx) value so duplicate HSTS
-            // headers never carry conflicting directives.
-            $headers['Strict-Transport-Security'] = 'max-age=31536000';
+            // HSTS with includeSubDomains and preload directive for
+            // HSTS preload list eligibility (hstspreload.org).
+            $headers['Strict-Transport-Security'] = 'max-age=63072000; includeSubDomains; preload';
         }
 
         foreach ($headers as $name => $value) {
@@ -38,6 +45,10 @@ class SecurityHeaders
                 $response->headers->set($name, $value);
             }
         }
+
+        // Remove server identification headers to prevent fingerprinting
+        $response->headers->remove('X-Powered-By');
+        $response->headers->remove('Server');
 
         return $response;
     }

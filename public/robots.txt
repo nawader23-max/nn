@@ -19,12 +19,48 @@ Allow: /refund
 Allow: /llms.txt
 Allow: /llms-full.txt
 
-# Disallow private user authenticated data and internal API scripts
+# Disallow private user authenticated data and internal API endpoints
 Disallow: /dashboard/
 Disallow: /investor/
 Disallow: /api/
 Disallow: /ref/
-Disallow: /storage/contracts/
+Disallow: /storage/
+Disallow: /login
+Disallow: /register
+Disallow: /register/verify
+Disallow: /forgot-password
+Disallow: /logout
+Disallow: /verify/
+Disallow: /pdpl
+Disallow: /build/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sw.js
+
+# Block malicious/scraping bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /dashboard/
+Disallow: /investor/
+Disallow: /api/
+Disallow: /storage/
 
 # ------------------------------------------------------------------------------
 # Generative AI Engines & LLM Search Crawlers (Full Discovery Clearance)
@@ -33,32 +69,54 @@ User-agent: GPTBot
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /dashboard/
+Disallow: /investor/
+Disallow: /api/
+Disallow: /storage/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /dashboard/
+Disallow: /investor/
+Disallow: /api/
 
 User-agent: ClaudeBot
 Allow: /
 Allow: /llms.txt
+Disallow: /dashboard/
+Disallow: /investor/
+Disallow: /api/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /dashboard/
+Disallow: /api/
 
 User-agent: PerplexityBot
 Allow: /
 Allow: /llms.txt
+Disallow: /dashboard/
+Disallow: /api/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /dashboard/
+Disallow: /api/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /dashboard/
+Disallow: /api/
 
 User-agent: Bytespider
 Allow: /
+Disallow: /dashboard/
+Disallow: /api/
 
 User-agent: CCBot
 Allow: /
+Disallow: /dashboard/
+Disallow: /api/
 
 # ------------------------------------------------------------------------------
 # Global Sitemaps

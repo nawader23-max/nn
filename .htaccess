@@ -1,5 +1,9 @@
-# Sovereign Security Layer - Root Shield
-# Protect sensitive application files, databases, codebases, and credentials
+# ==============================================================================
+# NAWADER SOVEREIGN PLATFORM — ROOT SECURITY SHIELD
+# Zero-Exposure Deep Defense Layer
+# ==============================================================================
+# Protect sensitive application files, databases, codebases, and credentials.
+# Only /public/ should ever be web-accessible.
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -8,8 +12,13 @@
     RewriteRule (^|/)\.(?!well-known/) - [F]
 
     # Block direct access to sensitive directories
-    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/|$) - [F,L,NC]
-    RewriteRule \.(env|json|lock|xml|yml|yaml|md|log|sqlite|sqlite3)$ - [F,L,NC]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|services|deploy|node_modules)(/|$) - [F,L,NC]
+
+    # Block sensitive file extensions from being served directly
+    RewriteRule \.(env|json|lock|xml|yml|yaml|md|log|sqlite|sqlite3|sql|bak|backup|sh|bash|ini|conf|cfg|dist|neon|phar|php_cs|gitignore|gitattributes|editorconfig|npmrc)$ - [F,L,NC]
+
+    # Block common attack paths (phpMyAdmin, wp-admin, etc.)
+    RewriteRule ^(phpmyadmin|pma|myadmin|wp-admin|wp-login|wp-content|administrator|admin\.php|xmlrpc\.php) - [F,L,NC]
 
     # Route all traffic to /public
     RewriteCond %{REQUEST_URI} !^/public/
@@ -18,3 +27,13 @@
 
 # Disable Directory Browsing
 Options -Indexes
+
+# Block access to .git, .svn, .hg directories
+<IfModule mod_alias.c>
+    RedirectMatch 404 /\.git
+    RedirectMatch 404 /\.svn
+    RedirectMatch 404 /\.hg
+</IfModule>
+
+# Prevent server signature exposure
+ServerSignature Off

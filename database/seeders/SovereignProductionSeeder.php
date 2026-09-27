@@ -398,7 +398,7 @@ class SovereignProductionSeeder extends Seeder
             [
                 'user_id' => $client->id,
                 'token_prefix' => 'nwdr_live_8f3a',
-                'token_hash' => hash('sha256', 'nwdr_live_8f3a918237d6e4b5c8a10f9273645e82'),
+                'token_hash' => hash('sha256', $this->seedSecret('SEED_DEV_TOKEN_LIVE')),
                 'abilities' => ['services:read', 'contracts:read', 'contracts:sign', 'invoices:create', 'zatca:verify'],
                 'environment' => 'live',
                 'last_used_at' => now()->subMinutes(14),
@@ -412,7 +412,7 @@ class SovereignProductionSeeder extends Seeder
             [
                 'user_id' => $developer->id,
                 'token_prefix' => 'nwdr_test_4b2c',
-                'token_hash' => hash('sha256', 'nwdr_test_4b2c89173a4e5d6f1092837465abcedf'),
+                'token_hash' => hash('sha256', $this->seedSecret('SEED_DEV_TOKEN_SANDBOX')),
                 'abilities' => ['sandbox:all', 'webhooks:test', 'contracts:draft', 'mock:wathq'],
                 'environment' => 'sandbox',
                 'last_used_at' => now()->subHours(2),
