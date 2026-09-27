@@ -759,6 +759,60 @@
   </div>
 </section>
 
+{{-- ═══ SOVEREIGN FREE TOOLS SHOWCASE ════════════════════════ --}}
+<section class="nw-section" style="padding: 5rem 0; background: linear-gradient(180deg, transparent 0%, rgba(15,23,40,0.5) 100%);">
+  <div class="nw-container">
+    <div style="text-align: center; margin-bottom: 3.5rem;">
+      <div class="nw-section-eyebrow" style="justify-content: center; margin-bottom: 0.8rem;">
+        <span>🛠️</span>
+        <span>خدمات وتسهيلات عامة مجانية</span>
+      </div>
+      <h2 class="nw-h2" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.8rem;">
+        أدوات نوادر <span class="nw-gradient-text">الرقمية المجانية</span> لرواد الأعمال
+      </h2>
+      <p class="nw-lead" style="max-width: 680px; margin: 0 auto;">
+        آلات حاسبة وأدوات معتمدة طبقاً للوائح هيئة الزكاة (زاتكا) والبنك المركزي السعودي ونطاقات، متاحة مجاناً 100% وبلا تسجيل.
+      </p>
+    </div>
+
+    <div class="nw-grid nw-grid-4" style="gap: 1.5rem; margin-bottom: 2.5rem;">
+      {{-- Tool 1 --}}
+      <a href="{{ route('tools.vat') }}" class="nw-card nw-card-interactive" style="padding: 1.75rem; text-decoration: none; border-top: 3px solid var(--nawader-gold); display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.8rem;">🧾</div>
+        <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.4rem;">حاسبة الضريبة 15%</h3>
+        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; margin: 0;">حساب فوري للمبالغ الشاملة وغير الشاملة وتوليد باركود زاتكا.</p>
+      </a>
+
+      {{-- Tool 2 --}}
+      <a href="{{ route('tools.iban') }}" class="nw-card nw-card-interactive" style="padding: 1.75rem; text-decoration: none; border-top: 3px solid var(--nawader-teal); display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.8rem;">🏦</div>
+        <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.4rem;">فحص الآيبان ساما</h3>
+        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; margin: 0;">فحص خوارزمي MOD-97 لجميع البنوك السعودية وكشف السويفت.</p>
+      </a>
+
+      {{-- Tool 3 --}}
+      <a href="{{ route('tools.nitaqat') }}" class="nw-card nw-card-interactive" style="padding: 1.75rem; text-decoration: none; border-top: 3px solid #00C853; display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇸🇦</div>
+        <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.4rem;">حاسبة نطاقات</h3>
+        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; margin: 0;">احتساب نسب السعودة وتحديد نطاق المنشأة والمستهدفات.</p>
+      </a>
+
+      {{-- Tool 4 --}}
+      <a href="{{ route('tools.qr') }}" class="nw-card nw-card-interactive" style="padding: 1.75rem; text-decoration: none; border-top: 3px solid var(--nawader-gold); display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.8rem;">📱</div>
+        <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.4rem;">مولد الباركود QR</h3>
+        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; margin: 0;">توليد فوري مشفر للروابط، الواي فاي، والواتساب بدقة عالية.</p>
+      </a>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="{{ route('tools.index') }}" class="nw-btn nw-btn-gold" style="padding: 0.85rem 2rem;">
+        استكشاف كافة الأدوات المجانية (8 أدوات متكاملة) ←
+      </a>
+    </div>
+  </div>
+</section>
+
 {{-- ═══ CTA ════════════════════════════════════════════════ --}}
 <section class="nw-section">
   <div class="nw-container">
@@ -803,6 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => {
     if(whyGrid) {
       whyGrid.style.gridTemplateColumns = window.innerWidth < 1024 ? '1fr' : '1fr 1fr';
+    }
   });
 
   // Live content update from visual editor iframe

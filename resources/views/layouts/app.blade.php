@@ -189,6 +189,7 @@
                 {{-- Desktop Navigation --}}
                 <ul class="nw-nav-links" id="nw-nav-links">
                     <li><a href="{{ route('services.index') }}" class="nw-nav-link {{ request()->routeIs('services.*') ? 'active' : '' }}">الخدمات</a></li>
+                    <li><a href="{{ route('tools.index') }}" class="nw-nav-link {{ request()->routeIs('tools.*') ? 'active' : '' }}">الأدوات المجانية</a></li>
                     <li><a href="{{ route('app-builder') }}" class="nw-nav-link {{ request()->routeIs('app-builder') ? 'active' : '' }}">بناء الأنظمة</a></li>
                     <li><a href="{{ route('studio') }}" class="nw-nav-link {{ request()->routeIs('studio') ? 'active' : '' }}">الأستديو السينمائي</a></li>
                     <li><a href="{{ route('pricing') }}" class="nw-nav-link {{ request()->routeIs('pricing') ? 'active' : '' }}">الأسعار</a></li>
@@ -228,6 +229,7 @@
             <div class="nw-mobile-menu-inner">
                 <ul class="nw-mobile-links">
                     <li><a href="{{ route('services.index') }}">الخدمات</a></li>
+                    <li><a href="{{ route('tools.index') }}">الأدوات المجانية</a></li>
                     <li><a href="{{ route('app-builder') }}">بناء الأنظمة السيادية</a></li>
                     <li><a href="{{ route('studio') }}">الأستديو السينمائي</a></li>
                     <li><a href="{{ route('pricing') }}">الأسعار</a></li>
@@ -314,6 +316,7 @@
                     <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.25rem;">القطاعات والخدمات</h4>
                     <ul style="display: flex; flex-direction: column; gap: 0.6rem; list-style: none;">
                         <li><a href="{{ route('services.index') }}" class="nw-footer-link">الكتالوج الهرمي (20 قطاعاً)</a></li>
+                        <li><a href="{{ route('tools.index') }}" class="nw-footer-link">الأدوات والحاسبات المجانية</a></li>
                         <li><a href="{{ route('studio') }}" class="nw-footer-link">أستديو نوادر السينمائي</a></li>
                         <li><a href="{{ route('app-builder') }}" class="nw-footer-link">بناء الأنظمة والتطبيقات</a></li>
                         <li><a href="{{ route('services.category', 'legal') }}" class="nw-footer-link">تأسيس الشركات والقانون</a></li>

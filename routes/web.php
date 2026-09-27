@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DocumentIngestionController;
 use App\Http\Controllers\EditorController;
+use App\Http\Controllers\FreeToolsController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntegrationsController;
@@ -55,6 +56,25 @@ Route::post('/contact', [ContactController::class, 'send'])->middleware(['thrott
 Route::get('/help', [HelpController::class, 'index'])->name('help');
 Route::get('/help/{slug}', [HelpController::class, 'article'])->name('help.article');
 Route::get('/help/search', [HelpController::class, 'search'])->name('help.search');
+
+// Sovereign Free Public Tools & Business Facilitation Suite (أدوات التسهيلات والخدمات العامة للمستخدمين)
+Route::prefix('tools')->name('tools.')->group(function () {
+    Route::get('/', [FreeToolsController::class, 'index'])->name('index');
+    Route::get('/vat-calculator', [FreeToolsController::class, 'vatCalculator'])->name('vat');
+    Route::post('/vat-calculator/calculate', [FreeToolsController::class, 'calculateVat'])->name('vat.calculate');
+    Route::post('/vat-calculator/zatca-qr', [FreeToolsController::class, 'generateZatcaQr'])->name('zatca.qr');
+    Route::get('/qr-generator', [FreeToolsController::class, 'qrGenerator'])->name('qr');
+    Route::get('/currency-converter', [FreeToolsController::class, 'currencyConverter'])->name('currency');
+    Route::post('/currency-converter/convert', [FreeToolsController::class, 'convertCurrency'])->name('currency.convert');
+    Route::get('/nitaqat-calculator', [FreeToolsController::class, 'nitaqatCalculator'])->name('nitaqat');
+    Route::post('/nitaqat-calculator/calculate', [FreeToolsController::class, 'calculateNitaqat'])->name('nitaqat.calculate');
+    Route::get('/cr-lookup', [FreeToolsController::class, 'crLookup'])->name('cr');
+    Route::post('/cr-lookup/verify', [FreeToolsController::class, 'verifyCrStructure'])->name('cr.verify');
+    Route::get('/business-name-generator', [FreeToolsController::class, 'businessNameGenerator'])->name('business-names');
+    Route::get('/iban-validator', [FreeToolsController::class, 'ibanValidator'])->name('iban');
+    Route::post('/iban-validator/validate', [FreeToolsController::class, 'validateIban'])->name('iban.validate');
+    Route::get('/invoice-generator', [FreeToolsController::class, 'invoiceGenerator'])->name('invoice');
+});
 
 // AI Public & Client API
 Route::post('/api/ai/chat', [AIController::class, 'chat'])->middleware('throttle:public-api')->name('ai.chat');
