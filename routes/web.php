@@ -108,7 +108,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     // Contracts & E-Sign
     Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts');
-    Route::post('/contracts/{id}/sign', [ContractsController::class, 'sign'])->name('contracts.sign');
+    Route::get('/contracts/{id}', [ContractsController::class, 'show'])->name('contracts.show');
+    Route::post('/contracts/{id}/otp', [ContractsController::class, 'requestOtp'])->middleware('throttle:10,1')->name('contracts.otp');
+    Route::get('/contracts/{id}/otp-status', [ContractsController::class, 'otpStatus'])->middleware('throttle:60,1')->name('contracts.otp-status');
+    Route::post('/contracts/{id}/sign', [ContractsController::class, 'sign'])->middleware('throttle:10,1')->name('contracts.sign');
+    Route::get('/contracts/{id}/download', [ContractsController::class, 'download'])->name('contracts.download');
 
     // Loyalty & Rewards
     Route::get('/loyalty', [LoyaltyController::class, 'index'])->name('loyalty');
@@ -153,6 +157,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/requests/{id}', [RequestController::class, 'show'])->name('requests.show');
     Route::get('/requests/{id}/track', [RequestController::class, 'track'])->name('requests.track');
     Route::post('/requests/{id}/documents', [RequestController::class, 'uploadDoc'])->name('requests.upload');
+    Route::get('/requests/{id}/events', [RequestController::class, 'eventsFeed'])->name('requests.events');
+    Route::post('/requests/{id}/escrow', [RequestController::class, 'payEscrow'])->middleware('throttle:10,1')->name('requests.escrow');
+    Route::post('/requests/{id}/invoice/final', [RequestController::class, 'issueFinalInvoice'])->middleware('throttle:5,1')->name('requests.invoice.final');
 
     // Payments
     Route::get('/payments', [DashboardController::class, 'payments'])->name('payments');
@@ -187,6 +194,8 @@ Route::middleware('auth')->prefix('investor')->name('investor.')->group(function
 Route::view('/privacy', 'pages.privacy')->name('privacy');
 Route::view('/terms', 'pages.terms')->name('terms');
 Route::view('/refund', 'pages.refund')->name('refund');
+Route::view('/pdpl', 'pages.pdpl')->name('pdpl');
+Route::get('/verify/{token}', [ContractsController::class, 'verify'])->name('contract.verify')->where('token', '[A-Za-z0-9]{20,64}');
 
 /*
 |--------------------------------------------------------------------------

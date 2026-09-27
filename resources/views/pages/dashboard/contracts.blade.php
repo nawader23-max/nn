@@ -35,12 +35,15 @@
           <div><small>التوقيع</small>{{ $contract->signed_at?->format('Y/m/d H:i') ?: 'لم يوقّع بعد' }}</div>
           <div><small>البصمة</small>{{ $contract->signature_hash ? substr($contract->signature_hash, 0, 16).'…' : 'ستُنشأ بعد التوقيع' }}</div>
         </div>
-        <div style="display:flex;justify-content:flex-end;gap:.7rem;margin-top:1rem">
+        <div style="display:flex;justify-content:flex-end;gap:.7rem;margin-top:1rem;flex-wrap:wrap">
           @if($contract->status === 'pending_signature')
-            <form method="POST" action="{{ route('dashboard.contracts.sign', $contract->id) }}">@csrf<button class="nw-btn nw-btn-primary nw-btn-sm" type="submit">توقيع العقد</button></form>
+            <a class="nw-btn nw-btn-primary nw-btn-sm" href="{{ route('dashboard.contracts.show', $contract->id) }}">✍️ دخول غرفة التوقيع الآمنة</a>
           @endif
-          @if($contract->pdf_path)
-            <a class="nw-btn nw-btn-ghost nw-btn-sm" href="{{ Storage::url($contract->pdf_path) }}">تحميل PDF</a>
+          @if($contract->pdf_path && Storage::exists($contract->pdf_path))
+            <a class="nw-btn nw-btn-ghost nw-btn-sm" href="{{ route('dashboard.contracts.download', $contract->id) }}">تحميل PDF</a>
+          @endif
+          @if($contract->verification_token && $contract->status === 'active')
+            <a class="nw-btn nw-btn-ghost nw-btn-sm" href="{{ url('/verify/'.$contract->verification_token) }}" target="_blank" rel="noopener">🔍 سجل التوثيق العام</a>
           @endif
         </div>
       </article>

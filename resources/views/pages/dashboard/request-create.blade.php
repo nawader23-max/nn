@@ -368,6 +368,11 @@
             ✓ بالنقر على اعتماد وإرسال الطلب، يتم فتح ملف معتمد في لوحة التحكم وتعيين مستشار رسمي وإصدار فاتورة إلكترونية معتمدة من هيئة ZATCA.
           </div>
 
+          <label style="display:flex;gap:.7rem;align-items:flex-start;background:rgba(0,212,200,.06);border:1px solid rgba(0,212,200,.3);border-radius:14px;padding:1rem 1.1rem;font-size:.83rem;line-height:1.8;color:var(--text-secondary);margin-bottom:1.4rem;cursor:pointer">
+            <input type="checkbox" name="pdpl_consent" value="1" required style="margin-top:.35rem;accent-color:var(--nawader-teal)">
+            <span>أوافق صراحةً على معالجة بياناتي الشخصية لأغراض تنفيذ الخدمة والفوترة وفق <a href="{{ route('pdpl') }}" target="_blank" rel="noopener" style="color:var(--nawader-gold-light)">إشعار حماية البيانات الشخصية (PDPL)</a>، وأفهم أن موافقتي ستُثبت بسجل مشفر يجمع عنوان IP والمتصفح والطابع الزمني.</span>
+          </label>
+
           <div class="nw-wizard-nav-btns">
             <button type="button" class="nw-btn nw-btn-ghost" onclick="jumpToStep(4)">→ تعديل البيانات</button>
             <button type="submit" class="nw-btn nw-btn-primary nw-btn-lg">
@@ -385,7 +390,8 @@
 
 <script>
 let currentStep = 1;
-let baseFee = 3500;
+const PRICING = @json($pricingMap);
+let baseFee = PRICING.fallback || 3500;
 let speedFee = 0;
 
 function jumpToStep(step) {
@@ -414,15 +420,8 @@ function selectCategory(slug, cardEl) {
   cardEl.classList.add('selected');
   document.getElementById('hidden-category').value = slug;
 
-  // Update base fee approximation
-  const feeMap = {
-    'legal': 3500, 'licenses': 1800, 'property': 2500, 'foreign-investment': 6500,
-    'local-investment': 4500, 'grants': 3500, 'ip': 2800, 'regulatory': 5500,
-    'trade': 2200, 'hr': 2800, 'environment': 9500, 'tech': 6500,
-    'health': 8500, 'education': 12000, 'tourism': 6500, 'energy': 14000,
-    'agriculture': 6500, 'finance': 18000, 'expat': 4500, 'consulting': 15000
-  };
-  baseFee = feeMap[slug] || 3500;
+  // Server-authoritative base fee (from the live catalog pricing engine).
+  baseFee = PRICING.base[slug] ?? PRICING.fallback ?? 3500;
 
   // Auto-fill suggested service
   const titles = {
@@ -443,7 +442,8 @@ function selectSpeed(speed, cardEl, fee) {
   document.querySelectorAll('.nw-speed-card').forEach(c => c.classList.remove('selected'));
   cardEl.classList.add('selected');
   document.getElementById('hidden-speed').value = speed;
-  speedFee = fee;
+  speedFee = PRICING.speed[speed] ?? fee ?? 0;
+  updateSummary();
 }
 
 function showUploadedFiles(input) {
