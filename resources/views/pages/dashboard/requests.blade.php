@@ -1,0 +1,18 @@
+@extends('layouts.app')
+@section('title', 'طلباتي — نوادر')
+@section('page_title', 'إدارة الطلبات')
+@push('head')
+<style>
+.nw-operations-page{max-width:1200px;margin:auto;padding:120px 28px 80px}.nw-operations-hero{border-radius:28px;padding:2rem;margin-bottom:1.25rem}.nw-operations-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.25rem 0}.nw-operations-stat{border-radius:18px;padding:1.25rem}.nw-operations-stat strong{font:800 1.9rem var(--font-latin);display:block;color:#fff}.nw-operation-list{border-radius:24px;padding:1.5rem}.nw-operation-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:1rem;padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.08);align-items:center}.nw-operation-row:last-child{border:0}@media(max-width:720px){.nw-operations-page{padding:90px 18px 60px}.nw-operations-stats{grid-template-columns:repeat(2,1fr)}.nw-operation-row{grid-template-columns:1fr}}
+</style>
+@endpush
+@section('content')
+<main class="nw-operations-page">
+  @if(session('success'))<div class="nw-cinematic-panel" style="padding:1rem 1.2rem;border-color:rgba(0,212,200,.35);margin-bottom:1rem;color:var(--nawader-teal)">{{ session('success') }}</div>@endif
+  <header class="nw-operations-hero nw-cinematic-panel" style="background:linear-gradient(100deg,rgba(8,14,28,.93),rgba(8,14,28,.6)),url('{{ asset('images/cinematic/nawader-orbit-hub-v1.webp') }}') center/cover"><div class="nw-section-eyebrow">سجل العمليات</div><h1 class="nw-h1" style="margin:.55rem 0">طلباتك بخط زمني واضح.</h1><p style="color:var(--text-secondary);max-width:650px">هنا تجد الطلبات التي تم إنشاؤها من حسابك فقط، مع مراحلها والمستندات المرفقة.</p><a href="{{ route('dashboard.requests.create') }}" class="nw-btn nw-btn-primary" style="margin-top:1.2rem">إنشاء طلب جديد</a></header>
+  <section class="nw-operations-stats"><article class="nw-operations-stat nw-cinematic-panel"><small>كل الطلبات</small><strong>{{ $summary['total'] }}</strong></article><article class="nw-operations-stat nw-cinematic-panel"><small>قيد المتابعة</small><strong>{{ $summary['active'] }}</strong></article><article class="nw-operations-stat nw-cinematic-panel"><small>مكتملة</small><strong>{{ $summary['completed'] }}</strong></article><article class="nw-operations-stat nw-cinematic-panel"><small>تحتاج مستندات</small><strong>{{ $summary['waiting'] }}</strong></article></section>
+  <section class="nw-operation-list nw-cinematic-panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.4rem"><div><h2 class="nw-h3">سجل الطلبات</h2><p style="color:var(--text-muted);font-size:.82rem">يتحدث عند تسجيل أي إجراء من فريق العمل.</p></div></div>
+    @forelse($requests as $operation)<article class="nw-operation-row"><div><strong>{{ $operation->service_name }}</strong><div style="font:600 .75rem var(--font-latin);color:var(--nawader-gold);margin-top:.2rem">{{ $operation->request_number }}</div><div style="font-size:.78rem;color:var(--text-muted);margin-top:.25rem">{{ $operation->entity_name }} · {{ $operation->submitted_at?->format('Y/m/d') }}</div><div class="nw-progress"><i style="width:{{ $operation->progress }}%"></i></div></div><span class="nw-status">{{ $operation->statusLabel() }}</span><a href="{{ route('dashboard.requests.show',$operation->request_number) }}" class="nw-btn nw-btn-ghost nw-btn-sm">فتح الطلب</a></article>@empty<div class="nw-empty"><strong style="color:#fff;display:block;margin-bottom:.5rem">لم تُنشئ أي طلب بعد</strong>ابدأ بطلب خدمة، وستحصل على رقم متابعة خاص بك فور الإرسال.</div>@endforelse
+  </section>
+</main>
+@endsection

@@ -1,0 +1,50 @@
+{
+    "name": "نوادر — المنظومة السيادية للخدمات",
+    "short_name": "نوادر",
+    "description": "المنظومة السيادية للخدمات الحكومية والاستشارية والتقنية — السعودية والولايات المتحدة.",
+    "id": "/",
+    "start_url": "/",
+    "scope": "/",
+    "dir": "rtl",
+    "lang": "ar-SA",
+    "display": "standalone",
+    "display_override": ["standalone", "minimal-ui"],
+    "orientation": "portrait-primary",
+    "background_color": "#F7F4EC",
+    "theme_color": "#0F6D62",
+    "categories": ["business", "finance", "productivity"],
+    "icons": [
+        {
+            "src": "/images/app-icons/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/images/app-icons/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/images/app-icons/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "الخدمات",
+            "short_name": "خدمات",
+            "url": "/services",
+            "icons": [{ "src": "/images/app-icons/pwa-192x192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "لوحتي",
+            "short_name": "لوحتي",
+            "url": "/dashboard",
+            "icons": [{ "src": "/images/app-icons/pwa-192x192.png", "sizes": "192x192" }]
+        }
+    ]
+}

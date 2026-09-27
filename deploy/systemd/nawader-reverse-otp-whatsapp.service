@@ -1,0 +1,22 @@
+[Unit]
+Description=Nawader reverse OTP WhatsApp listener
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www
+Group=www
+WorkingDirectory=/web/nawader/nawadersrv.com/services/reverse-otp-whatsapp
+EnvironmentFile=/etc/nawader-reverse-otp-whatsapp.env
+ExecStart=/usr/bin/node /web/nawader/nawadersrv.com/services/reverse-otp-whatsapp/server.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/nawader-reverse-otp-whatsapp
+
+[Install]
+WantedBy=multi-user.target

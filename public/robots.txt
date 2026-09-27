@@ -1,0 +1,66 @@
+# ==============================================================================
+# NAWADER SOVEREIGN PLATFORM — ROBOTS.TXT
+# Search Engine & AI Crawler Optimization Directive
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /services/*
+Allow: /studio
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /help
+Allow: /help/*
+Allow: /privacy
+Allow: /terms
+Allow: /refund
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Disallow private user authenticated data and internal API scripts
+Disallow: /dashboard/
+Disallow: /investor/
+Disallow: /api/
+Disallow: /ref/
+Disallow: /storage/contracts/
+
+# ------------------------------------------------------------------------------
+# Generative AI Engines & LLM Search Crawlers (Full Discovery Clearance)
+# ------------------------------------------------------------------------------
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ------------------------------------------------------------------------------
+# Global Sitemaps
+# ------------------------------------------------------------------------------
+Sitemap: https://nawadersrv.com/sitemap.xml

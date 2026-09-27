@@ -1,0 +1,347 @@
+/*
+ * ═══════════════════════════════════════════════════════════════
+ * NAWADER — SOVEREIGN OASIS THEME v3.0  (نمط واحة السيادة)
+ * Eye-comfort palette: ivory sand · oasis teal · warm amber ·
+ * dusk petrol, with cinematic world-city & nature scene backdrops
+ * extracted from the Nawader sovereign asset vault.
+ * Loaded AFTER app.css and light-theme.css — final authority.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+:root {
+  /* ── Sovereign Oasis tokens ─────────────────────────────── */
+  --nawader-navy: #16323A;
+  --nawader-dark: #F7F4EC;
+  --nawader-surface: #FFFFFF;
+  --nawader-surface-2: #F1EDE2;
+  --nawader-gold: #A8742C;
+  --nawader-gold-light: #C4913F;
+  --nawader-gold-dim: #855B1F;
+  --nawader-teal: #0F6D62;
+  --nawader-teal-dim: #0B5750;
+  --nawader-purple: #5E6FA8;
+  --nawader-rose: #B85C6E;
+  --nawader-blue: #3E7CB1;
+
+  --text-primary: #1C2A33;
+  --text-secondary: rgba(28, 42, 51, 0.78);
+  --text-muted: rgba(28, 42, 51, 0.58);
+  --text-disabled: rgba(28, 42, 51, 0.38);
+
+  --oasis-ivory: #F7F4EC;
+  --oasis-sand: #EFE9DA;
+  --oasis-petrol: #16323A;
+  --oasis-sage: #5C8A6E;
+
+  --grad-gold: linear-gradient(135deg, #A8742C 0%, #C4913F 55%, #8A5D20 100%);
+  --grad-teal: linear-gradient(135deg, #0F6D62 0%, #2E9C8D 100%);
+  --grad-space: linear-gradient(180deg, #FBF9F3 0%, #F7F4EC 52%, #EEF2EF 100%);
+  --grad-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(247, 244, 236, 0.93));
+
+  --shadow-card: 0 16px 40px rgba(38, 52, 58, 0.12);
+  --shadow-glass: 0 10px 30px rgba(38, 52, 58, 0.10), inset 0 1px 0 #ffffff;
+  --shadow-3d: 0 2px 0 rgba(133, 91, 31, 0.28), 0 12px 28px rgba(38, 52, 58, 0.16);
+}
+
+/* html keeps the opaque canvas color; body MUST stay transparent so the
+   fixed scene layer (body::before, z-index:-2) remains visible beneath it. */
+html {
+  background: var(--oasis-ivory) !important;
+}
+
+body {
+  background: transparent !important;
+}
+
+/* ── SCENE BACKDROP ENGINE ────────────────────────────────────
+ * body[data-scene] selects a curated 3D-render scene from the
+ * Nawader asset vault, veiled by warm ivory so all typography
+ * stays at WCAG-contrast levels over imagery.
+ * ──────────────────────────────────────────────────────────── */
+body::before {
+  transition: background-image 700ms ease;
+}
+
+body[data-scene]::before {
+  background:
+    radial-gradient(circle at 84% 6%, rgba(164, 116, 44, 0.16), transparent 32%),
+    radial-gradient(circle at 8% 14%, rgba(15, 109, 98, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(251, 249, 243, 0.96) 0%, rgba(247, 244, 236, 0.88) 38%, rgba(238, 242, 239, 0.93) 100%),
+    var(--scene-image) center / cover no-repeat fixed !important;
+}
+
+body[data-scene="kafd"]   { --scene-image: url('/images/scenes/home-city.webp'); }
+body[data-scene="neom"]   { --scene-image: url('/images/scenes/smart-city.webp'); }
+body[data-scene="alula"]  { --scene-image: url('/images/scenes/desert-gold.webp'); }
+body[data-scene="sea"]    { --scene-image: url('/images/scenes/ocean.webp'); }
+body[data-scene="oasis"]  { --scene-image: url('/images/scenes/oasis.webp'); }
+body[data-scene="mandala"]{ --scene-image: url('/images/scenes/mandala-city.webp'); }
+body[data-scene="cyber"]  { --scene-image: url('/images/scenes/cyber-city.webp'); }
+body[data-scene="aurora"] { --scene-image: url('/images/scenes/aurora.webp'); }
+body[data-scene="glass"]  { --scene-image: url('/images/scenes/desert-glass.webp'); }
+body[data-scene="abyss"]  { --scene-image: url('/images/scenes/deep-ocean.webp'); }
+body[data-scene="bio"]    { --scene-image: url('/images/scenes/biometric.webp'); }
+
+/* Dashboard keeps the scene barely-there for focus */
+body.nw-dashboard-shell::before {
+  background:
+    linear-gradient(180deg, rgba(251, 249, 243, 0.985) 0%, rgba(247, 244, 236, 0.965) 60%, rgba(240, 243, 238, 0.975) 100%),
+    var(--scene-image, url('/images/scenes/deep-ocean.webp')) center / cover no-repeat fixed !important;
+}
+
+/* Soft golden light band behind hero areas for depth (3D feel) */
+.nw-page-home .nw-hero-wrap::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(247, 244, 236, 0.88));
+}
+
+/* ── NAVIGATION: warm glass bar ─────────────────────────────── */
+.nw-navbar,
+.nw-navbar.scrolled {
+  background: rgba(251, 249, 243, 0.92) !important;
+  border-bottom: 1px solid rgba(22, 50, 58, 0.10) !important;
+  box-shadow: 0 10px 34px rgba(38, 52, 58, 0.10) !important;
+}
+
+.nw-nav-link {
+  color: #2A3B47 !important;
+  border-radius: 12px;
+}
+
+.nw-nav-link:hover,
+.nw-nav-link.active,
+.nw-mobile-links a:hover {
+  color: var(--nawader-teal) !important;
+  background: rgba(15, 109, 98, 0.10) !important;
+}
+
+.nw-mobile-menu,
+.nw-mobile-menu-inner {
+  background: rgba(251, 249, 243, 0.99) !important;
+}
+
+/* ── MOBILE DRAWER: collapsed by default ───────────────────────
+   The legacy stylesheet lost its hiding rules, so the drawer
+   rendered as a permanent link list under the navbar. Restore
+   proper open/close behaviour driven by app.js (.open toggle). */
+.nw-mobile-menu {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(22, 50, 58, 0.10);
+  box-shadow: 0 22px 50px rgba(38, 52, 58, 0.14);
+  transition: opacity 240ms ease, visibility 240ms ease, max-height 300ms ease;
+}
+
+.nw-mobile-menu.open {
+  max-height: calc(100dvh - 60px);
+  opacity: 1;
+  visibility: visible;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.nw-mobile-links {
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nw-mobile-links li {
+  list-style: none;
+}
+
+.nw-mobile-links a {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2A3B47;
+}
+
+/* Drawer is a mobile-only affordance (hamburger breakpoint 768px). */
+@media (min-width: 769px) {
+  .nw-mobile-menu {
+    display: none !important;
+  }
+}
+
+/* ── BUTTONS: soft dimensional (3D) ─────────────────────────── */
+.nw-btn-primary,
+.nw-btn-teal {
+  box-shadow: var(--shadow-3d) !important;
+  transition: transform 160ms ease, box-shadow 160ms ease !important;
+}
+
+.nw-btn-primary:hover,
+.nw-btn-teal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 rgba(133, 91, 31, 0.30), 0 18px 38px rgba(38, 52, 58, 0.22) !important;
+}
+
+.nw-btn-primary:active,
+.nw-btn-teal:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(133, 91, 31, 0.25), 0 6px 14px rgba(38, 52, 58, 0.16) !important;
+}
+
+/* ── CARDS: floating oasis surfaces ─────────────────────────── */
+.nw-card,
+.nw-service-card,
+.nw-cat-card,
+.nw-plan-card,
+.nw-feature-item,
+.builder-card,
+.advisor-card,
+.studio-card,
+.studio-card-item,
+.affiliate-card,
+.dev-card,
+.help-cat-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(22, 50, 58, 0.09) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+.nw-service-card:hover,
+.nw-cat-card:hover,
+.nw-plan-card:hover,
+.studio-card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 56px rgba(38, 52, 58, 0.18) !important;
+}
+
+/* ── FOOTER: deep petrol dusk ───────────────────────────────── */
+.nw-footer {
+  background: linear-gradient(180deg, #173842 0%, var(--oasis-petrol) 100%) !important;
+  border-top: 3px solid rgba(196, 145, 63, 0.55) !important;
+  box-shadow: 0 -18px 48px rgba(22, 50, 58, 0.28) !important;
+  color: #E8EFEA !important;
+}
+
+.nw-footer p,
+.nw-footer li,
+.nw-footer span,
+.nw-footer div {
+  color: #D9E3DE !important;
+}
+
+.nw-footer .nw-footer-heading,
+.nw-footer h4,
+.nw-footer h5,
+.nw-footer strong {
+  color: #F3E9D2 !important;
+}
+
+.nw-footer-link,
+.nw-footer-social {
+  color: #B9C9C3 !important;
+}
+
+.nw-footer-link:hover,
+.nw-footer-social:hover {
+  color: #E9C87B !important;
+}
+
+.nw-footer-bottom {
+  border-top-color: rgba(233, 235, 222, 0.14) !important;
+  color: #9FB3AC !important;
+}
+
+/* Legacy inline dark panels inside the footer must stay transparent */
+.nw-footer [style*="background:rgba(15,23,40"],
+.nw-footer [style*="background: rgba(15,23,40"] {
+  background: transparent !important;
+}
+
+/* ── SCENE SWITCHER UI revival ──────────────────────────────── */
+#nw-floating-controls > div {
+  background: rgba(22, 50, 58, 0.88) !important;
+  border: 1px solid rgba(196, 145, 63, 0.42) !important;
+  box-shadow: 0 14px 34px rgba(22, 50, 58, 0.34) !important;
+  border-radius: 30px !important;
+  padding: 4px 10px !important;
+  display: flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: calc(100vw - 32px);
+}
+
+#nw-floating-controls > div:last-child {
+  display: flex !important; /* re-enable landscape picker */
+}
+
+#nw-floating-controls .ls-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.7;
+  padding: 3px 9px;
+  color: #E6EEE9 !important;
+  border-radius: 20px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+#nw-floating-controls .ls-btn:hover {
+  background: rgba(196, 145, 63, 0.18);
+}
+
+#nw-floating-controls .ls-btn.active {
+  background: rgba(196, 145, 63, 0.32) !important;
+  color: #F3E2B3 !important;
+}
+
+/* ── PWA ergonomics ─────────────────────────────────────────── */
+.nw-navbar {
+  padding-top: max(0px, env(safe-area-inset-top));
+}
+
+#nw-floating-controls {
+  bottom: max(24px, env(safe-area-inset-bottom)) !important;
+}
+
+@media (display-mode: standalone) {
+  #nw-floating-controls {
+    display: none !important;
+  }
+
+  .nw-navbar {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Respect users who prefer calm */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    transition: none;
+  }
+
+  .nw-service-card:hover,
+  .nw-cat-card:hover,
+  .nw-plan-card:hover,
+  .nw-btn-primary:hover,
+  .nw-btn-teal:hover {
+    transform: none;
+  }
+}
+

@@ -1,0 +1,22 @@
+# Nawader Sovereign Platform (منصة نوادر السيادية)
+> The premier sovereign B2B and governmental integration gateway connecting the Saudi Vision 2030 ecosystem and the United States (Delaware Corridor).
+
+## Overview
+Nawader (نوادر) provides high-level sovereign digital services, corporate incorporation (Saudi Commercial Registry & Delaware LLC/C-Corp), MISA foreign investment licensing, digital contract issuance with SHA-256 cryptographic verification, ZATCA Phase 2 e-invoicing compliance, Nafath SSO, and Wathq integration.
+
+## Key Capabilities & Sectors
+- **Sovereign Legal & Dispute Resolution**: Arbitration under Saudi Center for Commercial Arbitration (SCCA), institutional FIDIC contracts.
+- **Megaproject Tenders & JV**: Procurement and vendor prequalification for NEOM (Oxagon, The Line, Trojena), KAFD, Red Sea, and Diriyah Gate.
+- **Bilateral Corridor**: Delaware corporation formation, IRS EIN acquisition, MISA Regional Headquarters (RHQ) tax exemption facilitation.
+- **Custom Software & Cloud Studio**: Development of sovereign portals, Flutter/Native mobile apps, and isolated local AI deployments.
+- **Generative AI Studio**: Sovereign legal drafts, 8K prompts, documentary video scriptwriting, and Wathq/ZATCA OCR document analysis.
+
+## Core URLs
+- Homepage: https://nawadersrv.com
+- Services Catalog (20 Sectors): https://nawadersrv.com/services
+- Sovereign App Builder: https://nawadersrv.com/services/app-builder
+- Showcase Media Studio: https://nawadersrv.com/studio
+- Pricing & Instant Calculator: https://nawadersrv.com/pricing
+- Help & Legal Center: https://nawadersrv.com/help
+- API Documentation: https://nawadersrv.com/dashboard/developer
+- Full LLM Specification: https://nawadersrv.com/llms-full.txt

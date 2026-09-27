@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Nawader Sovereign Gateway",
+  "name_for_model": "nawader_sovereign_gateway",
+  "description_for_human": "Sovereign Saudi-US Corporate Formation, Legal Drafting, MISA Licensing, and Megaproject Tenders Gateway.",
+  "description_for_model": "Plugin for accessing Nawader Sovereign Platform catalog, querying corporate formation requirements (Saudi Arabia & Delaware), calculating government fees, verifying commercial registrations, and drafting bilateral contracts.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://nawadersrv.com/api/ai/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://nawadersrv.com/images/nawader-logo-gold.svg",
+  "contact_email": "sovereign@nawadersrv.com",
+  "legal_info_url": "https://nawadersrv.com/terms"
+}

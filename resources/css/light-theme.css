@@ -1,0 +1,306 @@
+/*
+ * NAWADER Light Interface
+ * Production override loaded after the legacy cinematic stylesheet.
+ * Purpose: guarantee light surfaces across public pages and dashboard shells
+ * while preserving Nawader gold, teal and violet brand accents.
+ */
+
+:root {
+  color-scheme: light;
+  --nawader-navy: #172033;
+  --nawader-dark: #ffffff;
+  --nawader-surface: #ffffff;
+  --nawader-surface-2: #f3f7fb;
+  --nawader-gold: #a87300;
+  --nawader-gold-light: #c58b08;
+  --nawader-gold-dim: #8a6200;
+  --nawader-teal: #007d78;
+  --nawader-teal-dim: #006862;
+  --nawader-purple: #6847ce;
+  --nawader-rose: #c53f70;
+  --nawader-blue: #245cc7;
+  --text-primary: #172033;
+  --text-secondary: rgba(23, 32, 51, 0.76);
+  --text-muted: rgba(23, 32, 51, 0.62);
+  --text-disabled: rgba(23, 32, 51, 0.42);
+  --grad-space: linear-gradient(180deg, #ffffff 0%, #f4f8fc 52%, #eef6f7 100%);
+  --grad-glass: linear-gradient(135deg, rgba(255,255,255,.98), rgba(244,248,252,.94));
+  --grad-hero: radial-gradient(ellipse at 60% 40%, rgba(212,168,67,.14), rgba(0,125,120,.08) 42%, transparent 72%);
+  --shadow-card: 0 18px 46px rgba(46, 64, 89, 0.13);
+  --shadow-glass: 0 12px 32px rgba(46, 64, 89, 0.11), inset 0 1px 0 #ffffff;
+}
+
+html,
+body {
+  background: #f7fafc !important;
+  color: var(--text-primary) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 16%, rgba(0,125,120,.09), transparent 30%),
+    radial-gradient(circle at 88% 8%, rgba(212,168,67,.14), transparent 34%),
+    linear-gradient(180deg, #ffffff, #f7fafc 48%, #eef6f7);
+}
+
+/* The legacy WebGL scene paints an opaque dark canvas. */
+#nw-canvas,
+#nw-atmosphere-glow {
+  display: none !important;
+}
+
+.nw-cinematic-atmosphere::before {
+  opacity: .10 !important;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.94), rgba(255,255,255,.78), rgba(255,255,255,.93)),
+    url('/images/cinematic/nawader-orbit-hub-v1.webp') center top / cover no-repeat !important;
+}
+
+.nw-cinematic-atmosphere__grid {
+  opacity: .22 !important;
+  background-image:
+    linear-gradient(rgba(168,115,0,.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,115,0,.11) 1px, transparent 1px) !important;
+}
+
+.nw-cinematic-atmosphere__orb {
+  opacity: .09 !important;
+}
+
+/* Header and navigation */
+.nw-navbar,
+.nw-navbar.scrolled {
+  background: rgba(255,255,255,.94) !important;
+  border-bottom: 1px solid rgba(23,32,51,.10) !important;
+  box-shadow: 0 8px 30px rgba(46,64,89,.10) !important;
+}
+
+.nw-logo-mark,
+.nw-btn-primary,
+.nw-btn-teal {
+  color: #172033 !important;
+}
+
+.nw-nav-link,
+.nw-mobile-links a,
+.nw-hamburger span {
+  color: #344258 !important;
+}
+
+.nw-hamburger span {
+  background: #344258 !important;
+}
+
+.nw-nav-link:hover,
+.nw-nav-link.active,
+.nw-mobile-links a:hover {
+  color: #8a6200 !important;
+  background: rgba(212,168,67,.12) !important;
+}
+
+.nw-mobile-menu,
+.nw-mobile-menu-inner {
+  background: rgba(255,255,255,.98) !important;
+  border-color: rgba(23,32,51,.10) !important;
+  box-shadow: 0 22px 50px rgba(46,64,89,.14) !important;
+}
+
+/* Common surfaces */
+.nw-card,
+.nw-cinematic-panel,
+.nw-platform-mockup,
+.nw-float-badge,
+.nw-stats-bar,
+.nw-service-card,
+.nw-feature-item,
+.nw-feature-item:hover,
+.nw-process-num,
+.nw-testimonial,
+.nw-partner-chip,
+.nw-auth-card,
+.nw-contact-form-card,
+.nw-info-channel,
+.nw-plan-card,
+.nw-plan-card.popular,
+.nw-calc-card,
+.nw-cat-card,
+.nw-cat-hero-card,
+.nw-cat-sub-card,
+.nw-sidebar-card,
+.nw-subcat-card-main,
+.nw-svc-detail-card,
+.nw-service-panel,
+.nw-price-sticky-card,
+.nw-wizard-card,
+.help-hero-box,
+.help-cat-card,
+.faq-accordion-item,
+.article-body-panel,
+.article-sidebar-box,
+.legal-content-card,
+.refund-card,
+.builder-card,
+.advisor-card,
+.booking-panel,
+.studio-card-item,
+.studio-card,
+.affiliate-card,
+.dev-card,
+.provider-box,
+.pairing-card,
+.phone-verify-card {
+  background: rgba(255,255,255,.96) !important;
+  border-color: rgba(23,32,51,.11) !important;
+  box-shadow: var(--shadow-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Covers administrative cards whose names vary by feature. */
+.nw-dashboard-shell :where(
+  [class$="-card"],
+  [class*="-card "],
+  [class$="-panel"],
+  [class*="-panel "],
+  [class$="-box"],
+  [class*="-box "]
+) {
+  background-color: rgba(255,255,255,.97) !important;
+  border-color: rgba(23,32,51,.12) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Legacy inline surfaces; all variants occur in existing Blade templates. */
+body [style*="background:rgba(15,23,40"],
+body [style*="background: rgba(15,23,40"],
+body [style*="background:rgba(15, 23, 40"],
+body [style*="background: rgba(15, 23, 40"],
+body [style*="background:rgba(10,15,30"],
+body [style*="background: rgba(10,15,30"],
+body [style*="background:rgba(10, 15, 30"],
+body [style*="background: rgba(10, 15, 30"],
+body [style*="background:#020408"],
+body [style*="background: #020408"],
+body [style*="background:#0f172a"],
+body [style*="background: #0f172a"],
+body [style*="background:#030712"],
+body [style*="background: #030712"] {
+  background: rgba(255,255,255,.97) !important;
+  border-color: rgba(23,32,51,.12) !important;
+  color: var(--text-primary) !important;
+}
+
+body [style*="color:#fff"],
+body [style*="color: #fff"],
+body [style*="color:white"],
+body [style*="color: white"] {
+  color: var(--text-primary) !important;
+}
+
+/* Forms and data areas */
+.nw-input,
+.nw-wizard-input,
+.nw-wizard-select,
+.nw-wizard-textarea,
+#nw-catalog-search,
+input,
+select,
+textarea {
+  background-color: #ffffff !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(23,32,51,.16) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(23,32,51,.48) !important;
+}
+
+select option {
+  background: #ffffff !important;
+  color: var(--text-primary) !important;
+}
+
+.nw-divider,
+.nw-progress,
+.nw-card-footer-metrics {
+  border-color: rgba(23,32,51,.10) !important;
+  background-color: rgba(23,32,51,.07) !important;
+}
+
+/* Floating utilities, dialogs and consent */
+#nw-floating-controls > div,
+#nw-cookie-banner,
+.nw-tooltip,
+.nw-notification,
+[class*="ai-chat"],
+[class*="chat-widget"],
+[class*="chat-panel"] {
+  background: rgba(255,255,255,.97) !important;
+  border-color: rgba(23,32,51,.13) !important;
+  box-shadow: 0 18px 48px rgba(46,64,89,.16) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Landscape controls belonged to the retired dark WebGL scene. */
+#nw-floating-controls > div:last-child {
+  display: none !important;
+}
+
+#media-modal {
+  background: rgba(231,238,246,.92) !important;
+}
+
+#modal-screen,
+.studio-media-frame > div {
+  background: linear-gradient(145deg, #ffffff, #edf5fa) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Footer */
+.nw-footer {
+  background: rgba(255,255,255,.96) !important;
+  border-top: 1px solid rgba(23,32,51,.10) !important;
+  box-shadow: 0 -16px 44px rgba(46,64,89,.08) !important;
+}
+
+.nw-footer-bottom {
+  border-top-color: rgba(23,32,51,.10) !important;
+}
+
+.nw-footer-link,
+.nw-footer-social {
+  color: var(--text-secondary) !important;
+}
+
+/* Keep meaningful overlays light without flattening brand accents. */
+.nw-page-content section[style*="background:rgba(10,15,30"],
+.nw-page-content section[style*="background: rgba(10,15,30"] {
+  background: rgba(238,246,247,.82) !important;
+}
+
+@media (max-width: 768px) {
+  .nw-navbar,
+  .nw-navbar.scrolled,
+  .nw-mobile-menu {
+    background: #ffffff !important;
+  }
+
+  #nw-floating-controls {
+    max-width: calc(100vw - 24px);
+    left: 12px !important;
+    bottom: 12px !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-primary: #0d1628;
+    --text-secondary: #24324a;
+    --text-muted: #43516a;
+  }
+}

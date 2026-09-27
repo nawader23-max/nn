@@ -1,0 +1,35 @@
+# Nawader Sovereign Platform — Comprehensive LLM & Search Index Documentation (LLMS-FULL)
+
+## Organization Identity
+- Official Name: Nawader Sovereign Services Holding Group (مجموعة نوادر القابضة للخدمات السيادية والاستشارية)
+- Operational Regions: Riyadh, Kingdom of Saudi Arabia & Wilmington, State of Delaware, United States of America
+- Jurisdiction: Sovereign Kingdom of Saudi Arabia, Saudi Center for Commercial Arbitration (SCCA), State of Delaware Court of Chancery
+- Platform URL: https://nawadersrv.com
+
+## Sovereign Hierarchy — The 20 Strategic Sectors
+1. Legal & Corporate Formation (التأسيس والأنظمة القانونية): Saudi Single-Owner LLC, Closed Joint Stock, Delaware LLC, C-Corporation, SCCA Institutional Arbitration.
+2. Financial & ZATCA Invoicing (المالية والفوترة الإلكترونية): ZATCA Stage 2 Cryptographic XML stamping, Mada, Sadad, Moyasar, Stripe, Tabby, Tamara, Escrow Guarantee.
+3. Foreign Investment & MISA (الاستثمار الأجنبي وتراخيص ميسا): Regional Headquarters License (RHQ), 30-year tax exemptions, Delaware-Saudi investment bridge.
+4. Megaprojects & Vision 2030 (المشاريع الكبرى والمناقصات): Vendor pre-qualification, FIDIC contracts, NEOM (Oxagon, The Line, Trojena), KAFD, Red Sea, Diriyah Gate.
+5. Real Estate & Balady (العقارات والتطوير السكني): Municipal licensing, Balady platform sync, engineering supervision, title deed escrow.
+6. Technology & Sovereign AI (التقنية والذكاء الاصطناعي السيادي): Local ALLaM LLM, Octane-accelerated cloud frameworks, isolated enterprise AI models.
+7. Engineering & Architecture (الخدمات الهندسية وكود البناء): Saudi Building Code (SBC-2026) compliance, geotechnical surveys, smart city IoT.
+8. Industrial & Free Zones (الصناعة والمناطق الاقتصادية الخاصة): Special Economic Zones (SEZ) licensing, industrial registry, customs exemption.
+9. Energy & Renewables (الطاقة والصناعات النظيفة): Solar grid connectivity, green hydrogen partnerships, Aramco vendor registration.
+10. Logistics & Supply Chains (اللوجستيات وسلاسل الإمداد): Port customs clearance, Naqel dispatch integration, smart cargo tracking.
+11. Healthcare & SFDA (الرعاية الصحية وهيئة الغذاء والدواء): Medical device registration, SFDA warehouse clearance, clinical permits.
+12. Education & Professional Training (التعليم والاعتماد الأكاديمي): Vocational training academies, executive leadership programs, Qiwa professional exams.
+13. Tourism & Hospitality (السياحة والضيافة الفاخرة): AlUla luxury retreats, hotel operator licenses, Red Sea eco-tourism permits.
+14. Agriculture & Food Security (الزراعة والأمن الغذائي): MEWA environmental licenses, hydro-farming permits, sustainable irrigation grants.
+15. Media & Cinematic Production (الإعلام والإنتاج السينمائي): Film commission shooting permits, 8K VFX studios, sovereign voiceover production.
+16. Human Resources & Labor Law (الموارد البشرية ونظام العمل): Qiwa enterprise portal, Mudad wage protection, executive visa quotas, Saudization Nitaqat platinum.
+17. Defense & Cybersecurity (الأمن السيبراني والأنظمة الدفاعية): National Cybersecurity Authority (NCA-ECC) compliance, biometric access control.
+18. Mining & Mineral Wealth (التعدين والثروة المعدنية): Mineral exploration licenses, mining lease agreements, geological survey data rooms.
+19. Environmental & Green Saudi (البيئة والاستدامة الخضراء): Saudi Green Initiative compliance, carbon credit verification, zero-waste audits.
+20. Diplomatic & Bilateral Missions (البعثات الدبلوماسية والشراكات الدولية): Embassy protocol services, diplomatic fast-track logistics, bilateral trade agreements.
+
+## API & Webhook Specifications
+- Authentication: Bearer Token via header `Authorization: Bearer <API_KEY>`
+- Live Endpoint: `https://nawadersrv.com/api/v1/`
+- Webhook Signature: HMAC-SHA256 verified via header `X-Nawader-Signature`
+- Rate Limit: 100,000 monthly certified calls for Enterprise accounts.
