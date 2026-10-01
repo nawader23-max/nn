@@ -1,6 +1,6 @@
 /*
  * ═══════════════════════════════════════════════════════════════
- * NAWADER — SOVEREIGN OASIS THEME v3.0  (نمط واحة السيادة)
+ * NAWADER — SOVEREIGN OASIS THEME v4.0  (نمط واحة السيادة)
  * Eye-comfort palette: ivory sand · oasis teal · warm amber ·
  * dusk petrol, with cinematic world-city & nature scene backdrops
  * extracted from the Nawader sovereign asset vault.
@@ -57,36 +57,184 @@ body {
  * body[data-scene] selects a curated 3D-render scene from the
  * Nawader asset vault, veiled by warm ivory so all typography
  * stays at WCAG-contrast levels over imagery.
+ *
+ * Architecture:
+ *   body::before  →  z-index: -2  →  full-screen fixed scene layer
+ *   The body itself is transparent so ::before shows through.
  * ──────────────────────────────────────────────────────────── */
 body::before {
-  transition: background-image 700ms ease;
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 700ms ease, opacity 700ms ease;
+  will-change: transform; /* GPU compositing */
 }
 
-body[data-scene]::before {
-  background:
-    radial-gradient(circle at 84% 6%, rgba(164, 116, 44, 0.16), transparent 32%),
-    radial-gradient(circle at 8% 14%, rgba(15, 109, 98, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(251, 249, 243, 0.96) 0%, rgba(247, 244, 236, 0.88) 38%, rgba(238, 242, 239, 0.93) 100%),
-    var(--scene-image) center / cover no-repeat fixed !important;
+/* ── Scene image variables per page ──────────────────────────
+   Each scene gets its own image URL assigned via CSS variable.
+   The overlay (gradient) is applied after to unify legibility.
+   ──────────────────────────────────────────────────────────── */
+
+/* Default scene */
+body::before {
+  background-image:
+    radial-gradient(ellipse at 80% 5%,  rgba(168, 116, 44, 0.18), transparent 35%),
+    radial-gradient(ellipse at 5%  15%, rgba(15, 109, 98, 0.14),  transparent 30%),
+    linear-gradient(180deg,
+      rgba(251, 249, 243, 0.96) 0%,
+      rgba(247, 244, 236, 0.90) 40%,
+      rgba(238, 242, 239, 0.94) 100%
+    ),
+    url('/images/scenes/home-city.webp') center / cover no-repeat fixed;
 }
 
-body[data-scene="kafd"]   { --scene-image: url('/images/scenes/home-city.webp'); }
-body[data-scene="neom"]   { --scene-image: url('/images/scenes/smart-city.webp'); }
-body[data-scene="alula"]  { --scene-image: url('/images/scenes/desert-gold.webp'); }
-body[data-scene="sea"]    { --scene-image: url('/images/scenes/ocean.webp'); }
-body[data-scene="oasis"]  { --scene-image: url('/images/scenes/oasis.webp'); }
-body[data-scene="mandala"]{ --scene-image: url('/images/scenes/mandala-city.webp'); }
-body[data-scene="cyber"]  { --scene-image: url('/images/scenes/cyber-city.webp'); }
-body[data-scene="aurora"] { --scene-image: url('/images/scenes/aurora.webp'); }
-body[data-scene="glass"]  { --scene-image: url('/images/scenes/desert-glass.webp'); }
-body[data-scene="abyss"]  { --scene-image: url('/images/scenes/deep-ocean.webp'); }
-body[data-scene="bio"]    { --scene-image: url('/images/scenes/biometric.webp'); }
+/* Per-scene overrides */
+body[data-scene="kafd"]::before {
+  background-image:
+    radial-gradient(ellipse at 80% 5%,  rgba(168, 116, 44, 0.18), transparent 35%),
+    radial-gradient(ellipse at 5%  15%, rgba(15, 109, 98, 0.14),  transparent 30%),
+    linear-gradient(180deg,
+      rgba(251, 249, 243, 0.95) 0%,
+      rgba(247, 244, 236, 0.88) 40%,
+      rgba(238, 242, 239, 0.93) 100%
+    ),
+    url('/images/scenes/home-city.webp') center / cover no-repeat fixed;
+}
 
-/* Dashboard keeps the scene barely-there for focus */
+body[data-scene="neom"]::before {
+  background-image:
+    radial-gradient(ellipse at 90% 10%, rgba(62, 124, 177, 0.16), transparent 40%),
+    radial-gradient(ellipse at 5%  20%, rgba(15, 109, 98, 0.12),  transparent 35%),
+    linear-gradient(180deg,
+      rgba(248, 250, 252, 0.95) 0%,
+      rgba(243, 248, 250, 0.90) 45%,
+      rgba(235, 245, 242, 0.94) 100%
+    ),
+    url('/images/scenes/smart-city.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="alula"]::before {
+  background-image:
+    radial-gradient(ellipse at 75% 8%,  rgba(196, 145, 63, 0.22), transparent 38%),
+    radial-gradient(ellipse at 10% 25%, rgba(168, 116, 44, 0.14), transparent 30%),
+    linear-gradient(180deg,
+      rgba(253, 250, 242, 0.95) 0%,
+      rgba(250, 245, 230, 0.90) 45%,
+      rgba(244, 238, 218, 0.94) 100%
+    ),
+    url('/images/scenes/desert-gold.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="sea"]::before {
+  background-image:
+    radial-gradient(ellipse at 85% 12%, rgba(62, 124, 177, 0.20), transparent 40%),
+    radial-gradient(ellipse at 5%  18%, rgba(15, 109, 98, 0.16),  transparent 32%),
+    linear-gradient(180deg,
+      rgba(245, 250, 253, 0.95) 0%,
+      rgba(237, 248, 252, 0.90) 45%,
+      rgba(228, 244, 250, 0.94) 100%
+    ),
+    url('/images/scenes/ocean.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="oasis"]::before {
+  background-image:
+    radial-gradient(ellipse at 80% 10%, rgba(92, 138, 110, 0.18), transparent 38%),
+    radial-gradient(ellipse at 8%  20%, rgba(15, 109, 98, 0.14),  transparent 32%),
+    linear-gradient(180deg,
+      rgba(247, 252, 248, 0.95) 0%,
+      rgba(241, 249, 244, 0.90) 45%,
+      rgba(232, 245, 237, 0.94) 100%
+    ),
+    url('/images/scenes/oasis.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="mandala"]::before {
+  background-image:
+    radial-gradient(ellipse at 78% 8%,  rgba(168, 116, 44, 0.16), transparent 36%),
+    radial-gradient(ellipse at 8%  22%, rgba(94, 111, 168, 0.12), transparent 30%),
+    linear-gradient(180deg,
+      rgba(251, 249, 246, 0.95) 0%,
+      rgba(248, 245, 240, 0.90) 45%,
+      rgba(242, 238, 232, 0.94) 100%
+    ),
+    url('/images/scenes/mandala-city.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="cyber"]::before {
+  background-image:
+    radial-gradient(ellipse at 85% 6%,  rgba(15, 109, 98, 0.20),  transparent 40%),
+    radial-gradient(ellipse at 6%  18%, rgba(62, 124, 177, 0.16), transparent 35%),
+    linear-gradient(180deg,
+      rgba(244, 249, 250, 0.96) 0%,
+      rgba(236, 245, 248, 0.91) 45%,
+      rgba(226, 240, 245, 0.95) 100%
+    ),
+    url('/images/scenes/cyber-city.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="aurora"]::before {
+  background-image:
+    radial-gradient(ellipse at 70% 5%,  rgba(94, 111, 168, 0.22), transparent 42%),
+    radial-gradient(ellipse at 10% 20%, rgba(184, 92, 110, 0.12), transparent 30%),
+    linear-gradient(180deg,
+      rgba(248, 247, 252, 0.96) 0%,
+      rgba(243, 241, 250, 0.91) 45%,
+      rgba(235, 233, 247, 0.95) 100%
+    ),
+    url('/images/scenes/aurora.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="glass"]::before {
+  background-image:
+    radial-gradient(ellipse at 80% 8%,  rgba(196, 145, 63, 0.18), transparent 38%),
+    radial-gradient(ellipse at 6%  22%, rgba(15, 109, 98, 0.12),  transparent 30%),
+    linear-gradient(180deg,
+      rgba(252, 250, 244, 0.96) 0%,
+      rgba(248, 245, 236, 0.91) 45%,
+      rgba(241, 237, 226, 0.95) 100%
+    ),
+    url('/images/scenes/desert-glass.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="abyss"]::before {
+  background-image:
+    radial-gradient(ellipse at 85% 6%,  rgba(22, 50, 58, 0.12),   transparent 40%),
+    radial-gradient(ellipse at 5%  18%, rgba(15, 109, 98, 0.10),  transparent 32%),
+    linear-gradient(180deg,
+      rgba(247, 249, 250, 0.97) 0%,
+      rgba(241, 245, 247, 0.93) 50%,
+      rgba(233, 240, 243, 0.96) 100%
+    ),
+    url('/images/scenes/deep-ocean.webp') center / cover no-repeat fixed;
+}
+
+body[data-scene="bio"]::before {
+  background-image:
+    radial-gradient(ellipse at 80% 8%,  rgba(15, 109, 98, 0.18),  transparent 40%),
+    radial-gradient(ellipse at 8%  22%, rgba(62, 124, 177, 0.14), transparent 32%),
+    linear-gradient(180deg,
+      rgba(245, 250, 248, 0.96) 0%,
+      rgba(238, 246, 243, 0.91) 45%,
+      rgba(228, 241, 237, 0.95) 100%
+    ),
+    url('/images/scenes/biometric.webp') center / cover no-repeat fixed;
+}
+
+/* ── DASHBOARD: ultra-subtle scene for focus ────────────────── */
 body.nw-dashboard-shell::before {
-  background:
-    linear-gradient(180deg, rgba(251, 249, 243, 0.985) 0%, rgba(247, 244, 236, 0.965) 60%, rgba(240, 243, 238, 0.975) 100%),
-    var(--scene-image, url('/images/scenes/deep-ocean.webp')) center / cover no-repeat fixed !important;
+  background-image:
+    linear-gradient(180deg,
+      rgba(247, 249, 250, 0.985) 0%,
+      rgba(241, 245, 247, 0.970) 60%,
+      rgba(233, 240, 243, 0.978) 100%
+    ),
+    url('/images/scenes/deep-ocean.webp') center / cover no-repeat fixed !important;
 }
 
 /* Soft golden light band behind hero areas for depth (3D feel) */
@@ -102,26 +250,30 @@ body.nw-dashboard-shell::before {
 /* ── NAVIGATION: warm glass bar ─────────────────────────────── */
 .nw-navbar,
 .nw-navbar.scrolled {
-  background: rgba(251, 249, 243, 0.92) !important;
-  border-bottom: 1px solid rgba(22, 50, 58, 0.10) !important;
-  box-shadow: 0 10px 34px rgba(38, 52, 58, 0.10) !important;
+  background: rgba(251, 249, 243, 0.94) !important;
+  border-bottom: 1px solid rgba(22, 50, 58, 0.09) !important;
+  box-shadow: 0 8px 32px rgba(38, 52, 58, 0.10), 0 1px 0 rgba(255,255,255,0.8) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
 }
 
 .nw-nav-link {
   color: #2A3B47 !important;
   border-radius: 12px;
+  transition: color 200ms ease, background 200ms ease !important;
 }
 
 .nw-nav-link:hover,
 .nw-nav-link.active,
 .nw-mobile-links a:hover {
   color: var(--nawader-teal) !important;
-  background: rgba(15, 109, 98, 0.10) !important;
+  background: rgba(15, 109, 98, 0.09) !important;
 }
 
 .nw-mobile-menu,
 .nw-mobile-menu-inner {
   background: rgba(251, 249, 243, 0.99) !important;
+  backdrop-filter: blur(20px) !important;
 }
 
 /* ── MOBILE DRAWER: collapsed by default ───────────────────────
@@ -172,6 +324,12 @@ body.nw-dashboard-shell::before {
   font-size: 0.95rem;
   font-weight: 600;
   color: #2A3B47;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.nw-mobile-links a:hover {
+  color: var(--nawader-teal) !important;
+  background: rgba(15, 109, 98, 0.09) !important;
 }
 
 /* Drawer is a mobile-only affordance (hamburger breakpoint 768px). */
@@ -213,10 +371,12 @@ body.nw-dashboard-shell::before {
 .affiliate-card,
 .dev-card,
 .help-cat-card {
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.93) !important;
   border: 1px solid rgba(22, 50, 58, 0.09) !important;
   box-shadow: var(--shadow-card) !important;
   transition: transform 220ms ease, box-shadow 220ms ease !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 .nw-service-card:hover,
@@ -225,6 +385,24 @@ body.nw-dashboard-shell::before {
 .studio-card-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 26px 56px rgba(38, 52, 58, 0.18) !important;
+}
+
+/* ── PANELS: cinematic glass oasis (for pages that still reference
+   the dark palette from app.css) ─────────────────────────────── */
+.nw-cinematic-panel {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(22, 50, 58, 0.09) !important;
+  box-shadow: 0 16px 48px rgba(38, 52, 58, 0.10) !important;
+  color: var(--text-primary) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.nw-cinematic-panel strong,
+.nw-cinematic-panel h1,
+.nw-cinematic-panel h2,
+.nw-cinematic-panel h3 {
+  color: var(--text-primary) !important;
 }
 
 /* ── FOOTER: deep petrol dusk ───────────────────────────────── */
@@ -252,6 +430,7 @@ body.nw-dashboard-shell::before {
 .nw-footer-link,
 .nw-footer-social {
   color: #B9C9C3 !important;
+  transition: color 180ms ease !important;
 }
 
 .nw-footer-link:hover,
@@ -270,7 +449,33 @@ body.nw-dashboard-shell::before {
   background: transparent !important;
 }
 
-/* ── SCENE SWITCHER UI revival ──────────────────────────────── */
+/* ── DASHBOARD SIDEBAR / CONTENT AREAS ──────────────────────── */
+body.nw-dashboard-shell .nw-command-panel,
+body.nw-dashboard-shell .nw-command-hero,
+body.nw-dashboard-shell .nw-command-card {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border-color: rgba(22, 50, 58, 0.10) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 8px 24px rgba(38, 52, 58, 0.08) !important;
+}
+
+body.nw-dashboard-shell .nw-command-card strong {
+  color: var(--text-primary) !important;
+  font-size: 2rem !important;
+}
+
+body.nw-dashboard-shell .nw-operation {
+  border-bottom-color: rgba(22, 50, 58, 0.07) !important;
+}
+
+/* Auth pages: lighter background under the form */
+body[data-scene="aurora"] .nw-auth-card,
+body[data-scene="aurora"] .nw-auth-container {
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 24px 64px rgba(38, 52, 58, 0.14) !important;
+}
+
+/* ── SCENE SWITCHER UI ───────────────────────────────────────── */
 #nw-floating-controls > div {
   background: rgba(22, 50, 58, 0.88) !important;
   border: 1px solid rgba(196, 145, 63, 0.42) !important;
@@ -282,6 +487,7 @@ body.nw-dashboard-shell::before {
   flex-wrap: wrap;
   gap: 5px;
   max-width: calc(100vw - 32px);
+  backdrop-filter: blur(20px) !important;
 }
 
 #nw-floating-controls > div:last-child {
@@ -330,6 +536,64 @@ body.nw-dashboard-shell::before {
   }
 }
 
+/* ── PREMIUM SECTION TYPOGRAPHY ─────────────────────────────── */
+.nw-h2,
+.nw-h3,
+.nw-section-header h2,
+.nw-section-header h3 {
+  color: var(--text-primary) !important;
+}
+
+.nw-lead,
+.nw-section-header p {
+  color: var(--text-secondary) !important;
+}
+
+.nw-section-eyebrow {
+  color: var(--nawader-teal) !important;
+}
+
+.nw-gradient-text {
+  background: var(--grad-gold) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ── PREMIUM SCROLL-IN ANIMATION ────────────────────────────── */
+[data-nw-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-nw-animate].nw-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+[data-nw-animate][data-delay="150"] { transition-delay: 150ms; }
+[data-nw-animate][data-delay="300"] { transition-delay: 300ms; }
+[data-nw-animate][data-delay="450"] { transition-delay: 450ms; }
+
+/* ── GLOBAL FORM FIELDS (Oasis light) ───────────────────────── */
+.nw-input,
+.nw-select,
+.nw-textarea {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(22, 50, 58, 0.18) !important;
+  color: var(--text-primary) !important;
+}
+
+.nw-input:focus,
+.nw-select:focus,
+.nw-textarea:focus {
+  border-color: var(--nawader-teal) !important;
+  box-shadow: 0 0 0 3px rgba(15, 109, 98, 0.12) !important;
+}
+
 /* Respect users who prefer calm */
 @media (prefers-reduced-motion: reduce) {
   body::before {
@@ -340,8 +604,10 @@ body.nw-dashboard-shell::before {
   .nw-cat-card:hover,
   .nw-plan-card:hover,
   .nw-btn-primary:hover,
-  .nw-btn-teal:hover {
-    transform: none;
+  .nw-btn-teal:hover,
+  [data-nw-animate] {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
-

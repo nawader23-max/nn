@@ -404,6 +404,8 @@ select.nw-input { cursor: pointer; }
 [data-nw-animate][data-delay="300"] { transition-delay: 300ms; }
 [data-nw-animate][data-delay="400"] { transition-delay: 400ms; }
 [data-nw-animate].nw-animated { opacity: 1; transform: translateY(0); }
+[data-nw-animate].nw-visible  { opacity: 1; transform: translateY(0); }
+
 
 /* ── GLASS ──────────────────────────────────────────────────────── */
 .nw-glass {

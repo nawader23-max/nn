@@ -558,17 +558,27 @@ class NawaderAnimations {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('nw-animated');
+          const delay = entry.target.dataset.delay ? parseInt(entry.target.dataset.delay, 10) : 0;
+          if (delay) {
+            setTimeout(() => {
+              entry.target.classList.add('nw-visible');
+              entry.target.classList.add('nw-animated'); // backward compat
+            }, delay);
+          } else {
+            entry.target.classList.add('nw-visible');
+            entry.target.classList.add('nw-animated');
+          }
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('[data-nw-animate]').forEach(el => {
       observer.observe(el);
     });
   }
 }
+
 
 // ═══════════════════════════════════════════════
 // COUNTER ANIMATION

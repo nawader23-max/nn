@@ -30,13 +30,15 @@
   --shadow-glass: 0 12px 32px rgba(46, 64, 89, 0.11), inset 0 1px 0 #ffffff;
 }
 
-html,
-body {
-  background: #f7fafc !important;
+html {
+  background: var(--oasis-ivory, #F7F4EC) !important;
   color: var(--text-primary) !important;
 }
 
-body::before {
+/* body::before is managed by oasis-theme.css — do NOT override here
+   or scene backdrop images will be lost. Only the fallback (no data-scene)
+   gets a soft plain gradient. */
+body:not([data-scene])::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -246,9 +248,9 @@ select option {
   color: var(--text-primary) !important;
 }
 
-/* Landscape controls belonged to the retired dark WebGL scene. */
+/* Scene switcher is active in oasis-theme — keep it visible */
 #nw-floating-controls > div:last-child {
-  display: none !important;
+  display: flex !important;
 }
 
 #media-modal {
@@ -261,21 +263,8 @@ select option {
   color: var(--text-primary) !important;
 }
 
-/* Footer */
-.nw-footer {
-  background: rgba(255,255,255,.96) !important;
-  border-top: 1px solid rgba(23,32,51,.10) !important;
-  box-shadow: 0 -16px 44px rgba(46,64,89,.08) !important;
-}
-
-.nw-footer-bottom {
-  border-top-color: rgba(23,32,51,.10) !important;
-}
-
-.nw-footer-link,
-.nw-footer-social {
-  color: var(--text-secondary) !important;
-}
+/* Footer — petrol dark from oasis-theme takes precedence */
+/* light-theme does NOT override footer so the premium dark footer is preserved */
 
 /* Keep meaningful overlays light without flattening brand accents. */
 .nw-page-content section[style*="background:rgba(10,15,30"],
